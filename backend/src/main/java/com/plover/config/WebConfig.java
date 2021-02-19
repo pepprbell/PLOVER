@@ -12,10 +12,10 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowCredentials(true)
                 .allowedOrigins(
-                        "http://localhost:3000",
-                        "http://localhost:8080",
-                        "https://dev.plover.co.kr",
-                        "http://dev.plover.co.kr",
+//                        "http://localhost:3000",
+//                        "http://localhost:8080",
+//                        "https://dev.plover.co.kr",
+//                        "http://dev.plover.co.kr",
                         "https://plover.co.kr",
                         "http://plover.co.kr")
                 .allowedMethods("*")

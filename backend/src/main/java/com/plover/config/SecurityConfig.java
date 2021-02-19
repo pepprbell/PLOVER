@@ -67,11 +67,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/account/checkDupNickName").permitAll()
                 .antMatchers("/account/login").permitAll()
                 .antMatchers("/account/verify/**").permitAll()
-                .antMatchers("/study/**").permitAll()
-                .antMatchers("/follow/**").permitAll()
-                .antMatchers("/file/**").permitAll()
-                .antMatchers("/user/**").permitAll()
-                .antMatchers("/mentoring/**").permitAll()
+                .antMatchers("/notification/**").permitAll()
+                .antMatchers("/study/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+                .antMatchers("/follow/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+                .antMatchers("/mentoring/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+                .antMatchers("/chat/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+                .antMatchers("/comment/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+
                 //.antMatchers("/study/**").hasAnyRole("USER", "MANAGER", "ADMIN") //study 파트 접근 제한
                 .anyRequest().authenticated();
 
@@ -81,11 +84,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 스프링 시큐리티 룰을 무시하게 하는 Url 규칙(여기 등록하면 규칙 적용하지 않음)
      */
-    @Override // ignore check swagger resource
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
-                "/swagger-ui.html", "/webjars/**", "/swagger/**");
-    }
+//    @Override // ignore check swagger resource
+//    public void configure(WebSecurity web) {
+//        web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
+//                "/swagger-ui.html", "/webjars/**", "/swagger/**");
+//    }
 
     @Bean
     @Override
